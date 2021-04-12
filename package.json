@@ -1,0 +1,16 @@
+{
+  "name": "wetube-reloaded",
+  "version": "1.0.0",
+  "description": "Wetube clone with NodeJS, Express, Mongo",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ro-ssang/wetube-reloaded.git"
+  },
+  "author": "Rossang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ro-ssang/wetube-reloaded/issues"
+  },
+  "homepage": "https://github.com/ro-ssang/wetube-reloaded#readme"
+}
