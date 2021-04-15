@@ -17,9 +17,6 @@ export const see = (req, res) => {
   );
 };
 
-export const trending = (req, res) =>
-  res.send(
-    "<!DOCTYPE html><html><head><title>Wetube</title></head><body><h1>Home</h1><footer>&copy;2021 - All rights reserved</footer></body></html>"
-  );
+export const trending = (req, res) => res.render("home");
 
 export const upload = (req, res) => res.send("Upload Video");
