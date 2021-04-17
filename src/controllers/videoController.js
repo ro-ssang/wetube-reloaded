@@ -16,8 +16,22 @@ export const postEdit = (req, res) => {
 };
 
 export const postUpload = (req, res) => {
-  // here we add a video to videos array.
-  const { title } = req.body;
+  const { title, description, hashtags } = req.body;
+  const video = new Video({
+    title,
+    description,
+    hashtags: hashtags
+      .split(",")
+      .map((word) =>
+        word.trim()[0] === "#" ? word.trim() : "#" + word.trim()
+      ),
+    meta: {
+      views: 0,
+      rating: 0,
+    },
+    createdAt: Date.now(),
+  });
+  console.log(video);
   return res.redirect("/");
 };
 
