@@ -31,11 +31,20 @@ export const getEdit = (req, res) => {
   return res.render("edit", { pageTitle: `Editing: ${video.title}`, video });
 };
 
+export const getUpload = (req, res) => {
+  return res.render("upload", { pageTitle: "Upload Video" });
+};
+
 export const postEdit = (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
   videos[id - 1].title = title;
   return res.redirect(`/videos/${id}`);
+};
+
+export const postUpload = (req, res) => {
+  // here we add a video to videos array.
+  return res.redirect("/");
 };
 
 export const trending = (req, res) => {

@@ -1,4 +1,4 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
