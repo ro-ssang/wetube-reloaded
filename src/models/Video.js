@@ -30,6 +30,12 @@ const videoSchema = new mongoose.Schema({
   },
 });
 
+videoSchema.pre("save", async function () {
+  this.hashtags = this.hashtags[0]
+    .split(",")
+    .map((word) => (word.trim()[0] === "#" ? word.trim() : "#" + word.trim()));
+});
+
 const Video = mongoose.model("Video", videoSchema);
 
 export default Video;
