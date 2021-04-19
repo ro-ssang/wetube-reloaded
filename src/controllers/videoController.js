@@ -56,8 +56,16 @@ export const postUpload = async (req, res) => {
 };
 
 export const home = async (req, res) => {
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });
+};
+
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  if (keyword) {
+    // search
+  }
+  return res.render("search", { pageTitle: "Search" });
 };
 
 export const watch = async (req, res) => {
