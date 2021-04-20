@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import User from "../models/User";
 
 export const edit = (req, res) => res.send("Edit User");
@@ -44,15 +45,21 @@ export const postJoin = async (req, res) => {
 
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
-  const usernameExists = await User.exists({ username });
-  if (!usernameExists) {
+  const user = await User.findOne({ username });
+  const ok = await bcrypt.compare(password, user.password);
+  if (!user) {
     return res.status(400).render("login", {
       pageTitle: "Login",
       errorMessage: "An account with this username does not exists.",
     });
   }
-  // check if password correct.
-  return res.end();
+  if (!ok) {
+    return res.status(400).render("login", {
+      pageTitle: "Login",
+      errorMessage: "Wrong password.",
+    });
+  }
+  return res.redirect("/");
 };
 
 export const remove = (req, res) => res.send("Remove User");
