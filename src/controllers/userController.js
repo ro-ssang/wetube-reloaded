@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import e from "express";
 import fetch from "node-fetch";
 import User from "../models/User";
 
@@ -104,11 +105,28 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    const email = emailData.find((email) => email.primary && email.verified);
-    if (!email) {
+    const emailObj = emailData.find((email) => email.primary && email.verified);
+    if (!emailObj) {
       return res.redirect("/login");
     }
-    console.log(email);
+    const existingUser = await User.findOne({ email: emailObj.email });
+    if (existingUser) {
+      req.session.loggedIn = true;
+      req.session.user = existingUser;
+      return res.redirect("/");
+    } else {
+      const user = await User.create({
+        name: userData.name,
+        username: userData.login,
+        email: emailObj.email,
+        password: "",
+        socialOnly: true,
+        location: userData.location,
+      });
+      req.session.loggedIn = true;
+      req.session.user = user;
+      return res.redirect("/");
+    }
   } else {
     return res.redirect("/login");
   }
