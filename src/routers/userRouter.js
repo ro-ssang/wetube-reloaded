@@ -3,7 +3,6 @@ import {
   edit,
   finishGithubLogin,
   logout,
-  remove,
   see,
   startGithubLogin,
 } from "../controllers/userController";
@@ -14,7 +13,6 @@ userRouter.get("/edit", edit);
 userRouter.get("/github/finish", finishGithubLogin);
 userRouter.get("/github/start", startGithubLogin);
 userRouter.get("/logout", logout);
-userRouter.get("/remove", remove);
 userRouter.get("/:id", see);
 
 export default userRouter;
